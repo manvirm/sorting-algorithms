@@ -7,7 +7,7 @@ import java.util.*;
 public class bubblesort{
 
     //print array
-    public static void printArray(int[] data){
+    void printArray(int[] data){
         System.out.println("Sorted list: ");
         
        for(int element: data)
@@ -15,7 +15,7 @@ public class bubblesort{
     }
 
     //sort array with bubblesort algorithm
-    public static void sort(int[] data, int n){
+    void sort(int[] data, int n){
 
         int temp;
         int flag;
@@ -53,6 +53,8 @@ public class bubblesort{
 
     public static void main(String[] args){
 
+        bubblesort ob = new bubblesort();
+
         //Prompt input from user
         System.out.print("Enter input for sorting (ie. 50 10 20): ");
         Scanner input=new Scanner(System.in);
@@ -76,8 +78,8 @@ public class bubblesort{
         
         input.close();
 
-        sort(data, length);
-        printArray(data);
+        ob.sort(data, length);
+        ob.printArray(data);
 
     }
 }
