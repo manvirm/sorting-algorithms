@@ -11,7 +11,7 @@ public class quicksort{
 
         System.out.println("Sorted list: ");
         
-       for(int element: data)
+        for(int element: data)
           System.out.print(element + " ");
 
     }
@@ -26,17 +26,18 @@ public class quicksort{
     }
 
 
-    /* partition to find pivot
-     * inital pivot starts at index 0
-     * i starts at index 1 and j starts at index length - 1
+    /* partition to find pivot and sort
+     * given start index s and end index n
+     * pivot will be value at index s
+     * i starts at index s+1 and j starts at index n
      * increase i until we find value greater than pivot
      * then decrease j until we find value less than pivot, then swap those values
-     * repeat until i > j, then we swap value at j with pivot, and j becomes new pivot position
+     * repeat until i > j, then we swap value at j with pivot, and j becomes new pivot position. Return j
     */
     int partition(int[] data, int s, int n){
 
-        int i = 1;
-        int j = n-1;
+        int i = s+1;
+        int j = n;
         int pivot = data[s];
 
         //increment i until we find value greater than pivot
@@ -45,7 +46,8 @@ public class quicksort{
             if(data[i] > pivot){
 
                 //decrease j until we find value less than pivot
-                while(data[j] > pivot){
+                //j will worst case be same index as pivot. ensure j does not decrease less than pivot index (s)
+                while(data[j] > pivot && s<=j){
                     j--;
                 }
 
@@ -61,9 +63,32 @@ public class quicksort{
 
         //swap value at index j with pivot, now value
         //at index j is new pivot
-        swap(data, 0, j);
-        pivot = j;
-        return pivot;
+        swap(data, s, j);
+        return j;
+
+    }
+
+    /* sort array with quicksort
+    * find pivot with partition 
+    * continue sorting each side and finding new pivot
+    * until each element is sorted
+    */
+    void sort(int[] data, int s, int n){
+
+        int j;
+
+        if(s < n){
+
+            //find pivot
+            j = partition(data, s, n);
+
+            //sort left side of pivot
+            sort(data, s, j-1);
+
+            //sort right side of pivot
+            sort(data, j+1, n);    
+
+        }
 
     }
 
@@ -94,10 +119,7 @@ public class quicksort{
         
         input.close();
 
-        //Find position of pivot by doing partition on the array
-        int pivot = ob.partition(data, 0, length);
-        System.out.println(pivot);
-        
+        ob.sort(data, 0, length-1);
         ob.printArray(data);
 
     }
