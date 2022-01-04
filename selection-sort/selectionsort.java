@@ -31,13 +31,15 @@ public class selectionsort{
         //store index of min value of array
         int min;
 
-        for(int i=0; i < n; i++){
+        //loop goes to n-1 because the last element will be sorted once we reach end of array,
+        //so no need to check again
+        for(int i=0; i < n-1; i++){
 
-            //update index of min value in array to be equal to current item
+            //update index of min value in array to be equal to index of current item
             min = i;
 
-            //find the index of min value in array compared to the current item
-            //j=i+1 because we start at next index of current item (previous elements are sorted)
+            //find the min value in array compared to the current item, and set min to index of min value
+            //j=i+1 because we start at next index of current item (elements before current item are sorted)
             for(int j=i+1; j<n; j++){
 
                 if(data[j] < data[min]){
@@ -45,8 +47,10 @@ public class selectionsort{
                 }
             }
 
-            //swap min value with current item
-            swap(data, i, min);
+            //if min value found then swap with current item
+            if(min != i){
+                swap(data, i, min);
+            }
         }
 
     }
