@@ -4,7 +4,7 @@ import java.util.*;
  * Apply selection sort algorithm and return sorted list
  */
 
-public class quicksort{
+public class selectionsort{
 
     //print array
     void printArray(int[] data){
@@ -25,11 +25,36 @@ public class quicksort{
 
     }
 
+    //given array, apply selection sort
+    void sort(int[] data, int n){
+
+        //store index of min value of array
+        int min;
+
+        for(int i=0; i < n; i++){
+
+            //update index of min value in array to be equal to current item
+            min = i;
+
+            //find the index of min value in array compared to the current item
+            //j=i+1 because we start at next index of current item (previous elements are sorted)
+            for(int j=i+1; j<n; j++){
+
+                if(data[j] < data[min]){
+                    min = j;
+                }
+            }
+
+            //swap min value with current item
+            swap(data, i, min);
+        }
+
+    }
 
 
     public static void main(String[] args){
 
-        quicksort ob = new quicksort();
+        selectionsort ob = new selectionsort();
 
         //Prompt input from user
         System.out.print("Enter input for sorting (ie. 50 10 20): ");
@@ -53,7 +78,10 @@ public class quicksort{
         }
         
         input.close();
-        
+
+        ob.sort(data, length);
+        ob.printArray(data);
+
 
     }
 }
